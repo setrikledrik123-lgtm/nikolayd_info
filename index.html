@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NikolayD — Профиль</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(88, 101, 242, 0.22), transparent 35%),
+                radial-gradient(circle at 80% 80%, rgba(114, 137, 218, 0.14), transparent 35%),
+                #0b0d12;
+        }
+
+        .profile {
+            width: 100%;
+            max-width: 430px;
+            padding: 34px 28px 30px;
+            text-align: center;
+            background: rgba(20, 23, 31, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(12px);
+        }
+
+        .avatar-wrap {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            padding: 5px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5865f2, #8b5cf6);
+            box-shadow: 0 0 35px rgba(88, 101, 242, 0.35);
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #14171f;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            margin-bottom: 8px;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #aeb4c2;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #23d366;
+            box-shadow: 0 0 10px rgba(35, 211, 102, 0.65);
+        }
+
+        .discord-button {
+            width: 100%;
+            border: 0;
+            border-radius: 14px;
+            padding: 15px 18px;
+            background: #5865f2;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.28);
+        }
+
+        .discord-button:hover {
+            transform: translateY(-2px);
+            background: #6975f5;
+            box-shadow: 0 14px 30px rgba(88, 101, 242, 0.38);
+        }
+
+        .discord-button:active {
+            transform: translateY(0);
+        }
+
+        .hint {
+            margin-top: 16px;
+            color: #777f91;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 28px;
+            transform: translate(-50%, 20px);
+            width: min(90%, 430px);
+            padding: 15px 18px;
+            border-radius: 14px;
+            background: #181c25;
+            border: 1px solid rgba(35, 211, 102, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+            color: #fff;
+            font-size: 14px;
+            line-height: 1.45;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.25s ease;
+            z-index: 10;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .toast strong {
+            color: #23d366;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="profile">
+        <div class="avatar-wrap">
+            <img class="avatar" src="avatar.png" alt="Аватар NikolayD">
+        </div>
+
+        <h1 class="name">NikolayD</h1>
+
+        <div class="status">
+            <span class="dot"></span>
+            Онлайн
+        </div>
+
+        <button class="discord-button" id="discordButton">
+            Связаться в Discord
+        </button>
+
+        <p class="hint">
+            Нажмите кнопку, чтобы скопировать имя пользователя Discord.
+        </p>
+    </main>
+
+    <div class="toast" id="toast">
+        <strong>Успешно скопировано!</strong><br>
+        Вставьте <b>niko_1352647832</b> во вкладку «Добавить в друзья» и ожидайте запроса.
+    </div>
+
+    <script>
+        const discordUsername = "niko_1352647832";
+        const button = document.getElementById("discordButton");
+        const toast = document.getElementById("toast");
+
+        function showToast() {
+            toast.classList.add("show");
+
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 4500);
+        }
+
+        button.addEventListener("click", async () => {
+            try {
+                await navigator.clipboard.writeText(discordUsername);
+                showToast();
+            } catch (error) {
+                const textarea = document.createElement("textarea");
+                textarea.value = discordUsername;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand("copy");
+                textarea.remove();
+                showToast();
+            }
+        });
+    </script>
+</body>
+</html>
