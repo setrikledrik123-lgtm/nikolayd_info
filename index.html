@@ -1,9 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>NikolayD — Профиль</title>
 
     <style>
@@ -19,144 +19,301 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+
             font-family: Arial, Helvetica, sans-serif;
             color: #fff;
+
             background:
-                radial-gradient(circle at 20% 20%, rgba(88, 101, 242, 0.15), transparent 35%),
-                radial-gradient(circle at 80% 80%, rgba(102, 192, 244, 0.12), transparent 35%),
+                radial-gradient(
+                    circle at 20% 20%,
+                    rgba(88, 101, 242, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 80% 80%,
+                    rgba(102, 192, 244, 0.14),
+                    transparent 35%
+                ),
                 #0b0d12;
+
             position: relative;
+            overflow-x: hidden;
         }
 
-        /* Кнопка управления музыкой */
+        /* =========================
+           КНОПКА МУЗЫКИ
+        ========================= */
+
         .music-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
+
+            width: 48px;
+            height: 48px;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
+            background: rgba(255, 255, 255, 0.05);
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+
             cursor: pointer;
-            transition: 0.3s ease;
+
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+
             z-index: 100;
         }
 
         .music-toggle:hover {
             background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.05);
+            transform: scale(1.08);
+        }
+
+        .music-toggle:active {
+            transform: scale(0.95);
         }
 
         .music-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 21px;
+            height: 21px;
+
             fill: #aeb4c2;
-            transition: 0.2s;
+
+            transition: 0.25s ease;
+        }
+
+        .music-toggle.playing {
+            background: rgba(35, 211, 102, 0.1);
+            border-color: rgba(35, 211, 102, 0.35);
+
+            box-shadow:
+                0 0 20px rgba(35, 211, 102, 0.15);
         }
 
         .music-toggle.playing svg {
             fill: #23d366;
-            animation: spin 4s linear infinite;
+
+            animation: musicSpin 4s linear infinite;
         }
 
-        @keyframes spin {
-            100% {
+        @keyframes musicSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
                 transform: rotate(360deg);
             }
         }
 
+        /* =========================
+           ПРОФИЛЬ
+        ========================= */
+
         .profile {
             width: 100%;
             max-width: 430px;
+
             padding: 34px 28px 30px;
+
             text-align: center;
+
             background: rgba(20, 23, 31, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
             border-radius: 24px;
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+
+            box-shadow:
+                0 25px 80px
+                rgba(0, 0, 0, 0.5);
+
             backdrop-filter: blur(12px);
+
+            animation: profileAppear 0.6s ease;
         }
+
+        @keyframes profileAppear {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* =========================
+           АВАТАР
+        ========================= */
 
         .avatar-wrap {
             width: 150px;
             height: 150px;
+
             margin: 0 auto 20px;
+
             padding: 5px;
+
             border-radius: 50%;
-            background: linear-gradient(135deg, #5865f2, #66c0f4);
-            box-shadow: 0 0 35px rgba(88, 101, 242, 0.25);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #5865f2,
+                    #66c0f4
+                );
+
+            box-shadow:
+                0 0 35px
+                rgba(88, 101, 242, 0.25);
+
             overflow: hidden;
         }
 
         .avatar {
             width: 100%;
             height: 100%;
+
             display: block;
+
             object-fit: cover;
+
             border-radius: 50%;
-            border: 4px solid #14171f;
-            transition: transform 0.3s ease;
+
+            border:
+                4px solid
+                #14171f;
+
+            transition:
+                transform 0.3s ease;
         }
 
         .avatar-wrap:hover .avatar {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
+
+        /* =========================
+           ИМЯ
+        ========================= */
 
         .name {
             font-size: 30px;
             font-weight: 800;
+
             letter-spacing: 0.2px;
+
             margin-bottom: 8px;
         }
 
+        /* =========================
+           СТАТУС
+        ========================= */
+
         .status {
             display: inline-flex;
+
             align-items: center;
+
             gap: 8px;
+
             color: #aeb4c2;
+
             font-size: 14px;
+
             margin-bottom: 28px;
         }
 
         .dot {
             width: 9px;
             height: 9px;
+
             border-radius: 50%;
+
             background: #23d366;
-            box-shadow: 0 0 10px rgba(35, 211, 102, 0.65);
+
+            box-shadow:
+                0 0 10px
+                rgba(35, 211, 102, 0.65);
+
+            animation: onlinePulse 2s infinite;
         }
 
-        /* Контейнер для кнопок */
+        @keyframes onlinePulse {
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow:
+                    0 0 10px
+                    rgba(35, 211, 102, 0.65);
+            }
+
+            50% {
+                opacity: 0.6;
+                box-shadow:
+                    0 0 5px
+                    rgba(35, 211, 102, 0.3);
+            }
+        }
+
+        /* =========================
+           КНОПКИ
+        ========================= */
+
         .buttons-container {
             display: flex;
+
             flex-direction: column;
+
             gap: 12px;
         }
 
         .btn {
             width: 100%;
+
             border: 0;
+
             border-radius: 14px;
+
             padding: 15px 18px;
+
             color: white;
+
             font-size: 16px;
             font-weight: 700;
+
             cursor: pointer;
-            transition: 0.2s ease;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+
             display: flex;
+
             align-items: center;
             justify-content: center;
+
             gap: 10px;
+
             text-decoration: none;
         }
 
         .btn svg {
             width: 20px;
             height: 20px;
+
             fill: currentColor;
         }
 
@@ -168,73 +325,136 @@
             transform: translateY(0);
         }
 
-        /* Discord */
+        /* =========================
+           DISCORD
+        ========================= */
+
         .discord-button {
             background: #5865f2;
-            box-shadow: 0 10px 25px rgba(88, 101, 242, 0.28);
+
+            box-shadow:
+                0 10px 25px
+                rgba(88, 101, 242, 0.28);
         }
 
         .discord-button:hover {
             background: #6975f5;
-            box-shadow: 0 14px 30px rgba(88, 101, 242, 0.38);
+
+            box-shadow:
+                0 14px 30px
+                rgba(88, 101, 242, 0.38);
         }
 
-        /* Steam */
+        /* =========================
+           STEAM
+        ========================= */
+
         .steam-button {
             background: #171a21;
-            border: 1px solid rgba(102, 192, 244, 0.2);
-            box-shadow: 0 10px 25px rgba(23, 26, 33, 0.45);
+
+            border:
+                1px solid
+                rgba(102, 192, 244, 0.2);
+
+            box-shadow:
+                0 10px 25px
+                rgba(23, 26, 33, 0.45);
         }
 
         .steam-button:hover {
             background: #2a475e;
+
             border-color: #66c0f4;
-            box-shadow: 0 14px 30px rgba(102, 192, 244, 0.25);
+
+            box-shadow:
+                0 14px 30px
+                rgba(102, 192, 244, 0.25);
         }
+
+        /* =========================
+           ПОДСКАЗКА
+        ========================= */
 
         .hint {
             margin-top: 16px;
+
             color: #777f91;
+
             font-size: 12px;
+
             line-height: 1.5;
         }
 
-        /* Уведомление */
+        /* =========================
+           УВЕДОМЛЕНИЕ
+        ========================= */
+
         .toast {
             position: fixed;
+
             left: 50%;
             bottom: 28px;
-            transform: translate(-50%, 20px);
+
+            transform:
+                translate(-50%, 20px);
+
             width: min(90%, 430px);
+
             padding: 15px 18px;
+
             border-radius: 14px;
+
             background: #181c25;
-            border: 1px solid rgba(35, 211, 102, 0.3);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.45);
+
+            border:
+                1px solid
+                rgba(35, 211, 102, 0.3);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0, 0, 0, 0.45);
+
             color: #fff;
+
             font-size: 14px;
+
             line-height: 1.45;
+
             opacity: 0;
+
             pointer-events: none;
+
             transition: 0.25s ease;
-            z-index: 10;
+
+            z-index: 200;
         }
 
         .toast.show {
             opacity: 1;
-            transform: translate(-50%, 0);
+
+            transform:
+                translate(-50%, 0);
         }
 
         .toast strong {
             color: #23d366;
+
             display: inline-flex;
+
             align-items: center;
+
             gap: 6px;
         }
 
+        /* =========================
+           МОБИЛЬНАЯ ВЕРСИЯ
+        ========================= */
+
         @media (max-width: 500px) {
+
             .profile {
-                padding: 30px 20px 26px;
+                padding:
+                    30px 20px 26px;
             }
 
             .avatar-wrap {
@@ -256,209 +476,445 @@
 
 <body>
 
-    <!-- Музыка -->
-    <audio id="bgMusic" src="music.mp3" loop></audio>
+    <!-- =========================
+         МУЗЫКА
+    ========================= -->
 
-    <!-- Кнопка музыки -->
+    <audio
+        id="bgMusic"
+        src="music.mp3"
+        loop
+        preload="auto">
+    </audio>
+
+
+    <!-- =========================
+         КНОПКА МУЗЫКИ
+    ========================= -->
+
     <button
         class="music-toggle"
         id="musicToggle"
         title="Включить / Выключить музыку"
-        aria-label="Управление музыкой"
-    >
+        aria-label="Управление музыкой">
+
         <svg viewBox="0 0 24 24">
-            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+            <path d="
+                M12 3v10.55
+                c-.59-.34-1.27-.55-2-.55
+                -2.21 0-4 1.79-4 4
+                s1.79 4 4 4
+                4-1.79 4-4V7h4V3h-6z
+            "/>
         </svg>
+
     </button>
+
+
+    <!-- =========================
+         ПРОФИЛЬ
+    ========================= -->
 
     <main class="profile">
 
         <!-- Аватар -->
+
         <div class="avatar-wrap">
+
             <img
                 class="avatar"
                 src="avatar.png"
-                alt="Аватар NikolayD"
-            >
+                alt="Аватар NikolayD">
+
         </div>
+
 
         <!-- Имя -->
-        <h1 class="name">NikolayD</h1>
+
+        <h1 class="name">
+            NikolayD
+        </h1>
+
 
         <!-- Статус -->
+
         <div class="status">
+
             <span class="dot"></span>
+
             Онлайн
+
         </div>
+
+
+        <!-- =========================
+             КНОПКИ
+        ========================= -->
 
         <div class="buttons-container">
 
-            <!-- Discord -->
+
+            <!-- DISCORD -->
+
             <button
                 class="btn discord-button"
                 id="discordButton"
-                type="button"
-            >
+                type="button">
+
                 <svg viewBox="0 0 127.14 96.36">
-                    <path d="M107.7,8.07A105.15,105.15,0,0,0,77.26,0a77.19,77.19,0,0,0-3.3,6.83A96.67,96.67,0,0,0,53.22,6.83,77.19,77.19,0,0,0,49.88,0,105.15,105.15,0,0,0,19.44,8.07C3.66,31.58-1.86,54.65,1,77.53A105.73,105.73,0,0,0,32,96.36a74.37,74.37,0,0,0,6.72-10.93,68.6,68.6,0,0,1-10.64-5.12c.91-.67,1.81-1.37,2.65-2.1a75.22,75.22,0,0,0,72.78,0c.84.73,1.74,1.43,2.65,2.1a68.86,68.86,0,0,1-10.64,5.12,74.74,74.74,0,0,0,6.72,10.93,105.73,105.73,0,0,0,31-18.83C129.72,49.52,123.82,26.69,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36,53.88,46,53.79,53,48.72,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.24,60,73.24,53S78.41,40.36,84.69,40.36,96.12,46,96,53,91,65.69,84.69,65.69Z"/>
+
+                    <path d="
+                        M107.7,8.07A105.15,105.15,0,0,0,77.26,0
+                        a77.19,77.19,0,0,0-3.3,6.83
+                        A96.67,96.67,0,0,0,53.22,6.83
+                        A77.19,77.19,0,0,0,49.88,0
+                        A105.15,105.15,0,0,0,19.44,8.07
+                        C3.66,31.58-1.86,54.65,1,77.53
+                        A105.73,105.73,0,0,0,32,96.36
+                        a74.37,74.37,0,0,0,6.72-10.93
+                        a68.6,68.6,0,0,1-10.64-5.12
+                        c.91-.67,1.81-1.37,2.65-2.1
+                        a75.22,75.22,0,0,0,72.78,0
+                        c.84.73,1.74,1.43,2.65,2.1
+                        a68.86,68.86,0,0,1-10.64,5.12
+                        a74.74,74.74,0,0,0,6.72,10.93
+                        a105.73,105.73,0,0,0,31-18.83
+                        C129.72,49.52,123.82,26.69,107.7,8.07ZM42.45,65.69
+                        C36.18,65.69,31,60,31,53S36.18,40.36,42.45,40.36
+                        S53.88,46,53.79,53
+                        S48.72,65.69,42.45,65.69Zm42.24,0
+                        C78.41,65.69,73.24,60,73.24,53
+                        S78.41,40.36,84.69,40.36
+                        S96.12,46,96,53
+                        S91,65.69,84.69,65.69Z
+                    "/>
+
                 </svg>
 
                 Связаться в Discord
+
             </button>
 
-            <!-- Steam -->
+
+            <!-- STEAM -->
+
             <a
                 href="https://steamcommunity.com/profiles/76561199275441760/"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="btn steam-button"
-                id="steamButton"
-            >
+                id="steamButton">
+
                 <svg viewBox="0 0 24 24">
-                    <path d="M12 .007c-6.19 0-11.267 4.704-11.933 10.748 1.472-.942 3.327-1.35 5.176-.948l4.475-6.505c.23-.332.6-.533 1.002-.542.404-.006.786.175 1.034.493l4.57 5.865c.983-.34 2.052-.405 3.087-.134l.02-.008c2.97-.833 6.074.912 6.908 3.882.833 2.972-.913 6.075-3.884 6.908-2.97.834-6.074-.912-6.907-3.883l-.004-.015c-.4-.1-.13-.485-.502l-5.696-2.45c-.417.753-1.042 1.343-1.792 1.691l-.116 4.764c-.007.417-.225.8-.58 1.028-.357-.222-.58-.61-.58-1.028v-.07l.067-2.738c2.148-.052 3.96-1.523 4.394-3.64.516-2.52-1.12-4.95-3.64-5.467-2.522-.517-4.953 1.12-5.47 3.64-.326 1.594.333 3.176 1.536 4.116l-2.99 4.326C3.962 18.067 2 15.26 2 12.007c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c-.966 0-1.9.137-2.784.393-.16-.015-.32-.047-.482-.047-.116 0-.23.013-.344.025C9.444 23.774 10.692 24 12 24c6.627 0 12-5.373 12-12S18.627.007 12 .007z"/>
+
+                    <path d="
+                        M12 .007
+                        c-6.19 0-11.267 4.704-11.933 10.748
+                        1.472-.942 3.327-1.35 5.176-.948
+                        l4.475-6.505
+                        c.23-.332.6-.533 1.002-.542
+                        .404-.006.786.175 1.034.493
+                        l4.57 5.865
+                        c.983-.34 2.052-.405 3.087-.134
+                        l.02-.008
+                        c2.97-.833 6.074.912 6.908 3.882
+                        .833 2.972-.913 6.075-3.884 6.908
+                        -2.97.834-6.074-.912-6.907-3.883
+                        l-.004-.015
+                        c-.4-.1-.13-.485-.502
+                        l-5.696-2.45
+                        c-.417.753-1.042 1.343-1.792 1.691
+                        l-.116 4.764
+                        c-.007.417-.225.8-.58 1.028
+                        -.357-.222-.58-.61-.58-1.028
+                        v-.07l.067-2.738
+                        c2.148-.052 3.96-1.523 4.394-3.64
+                        .516-2.52-1.12-4.95-3.64-5.467
+                        -2.522-.517-4.953 1.12-5.47 3.64
+                        -.326 1.594.333 3.176 1.536 4.116
+                        l-2.99 4.326
+                        C3.962 18.067,2 15.26,2 12.007
+                        c0-5.523 4.477-10 10-10
+                        s10 4.477 10 10-4.477 10-10 10
+                        c-.966 0-1.9.137-2.784.393
+                        -.16-.015-.32-.047-.482-.047
+                        -.116 0-.23.013-.344.025
+                        C9.444 23.774,10.692 24,12 24
+                        c6.627 0 12-5.373 12-12S18.627.007 12 .007z
+                    "/>
+
                 </svg>
 
                 Профиль Steam
+
             </a>
 
         </div>
 
+
+        <!-- Подсказка -->
+
         <p class="hint">
-            Нажмите кнопку, чтобы скопировать Discord или перейти в Steam.
+            Нажмите кнопку Discord, чтобы скопировать мой ник.
+            Музыку можно включить кнопкой сверху.
         </p>
 
     </main>
 
-    <!-- Уведомление -->
-    <div class="toast" id="toast">
-        <strong>✓ Успешно скопировано!</strong><br>
-        Вставьте <b>niko_1352647832</b> во вкладку «Добавить в друзья»
+
+    <!-- =========================
+         УВЕДОМЛЕНИЕ
+    ========================= -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        <strong>
+            ✓ Успешно скопировано!
+        </strong>
+
+        <br>
+
+        Вставьте
+        <b>niko_1352647832</b>
+        во вкладку «Добавить в друзья»
         и ожидайте запроса.
+
     </div>
 
-    <script>
-        const discordUsername = "niko_1352647832";
 
-        const button = document.getElementById("discordButton");
-        const steamButton = document.getElementById("steamButton");
-        const toast = document.getElementById("toast");
-        const audio = document.getElementById("bgMusic");
-        const musicToggle = document.getElementById("musicToggle");
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        /* =========================
+           НАСТРОЙКИ
+        ========================= */
+
+        const discordUsername =
+            "niko_1352647832";
+
+
+        /* =========================
+           ЭЛЕМЕНТЫ
+        ========================= */
+
+        const discordButton =
+            document.getElementById(
+                "discordButton"
+            );
+
+        const steamButton =
+            document.getElementById(
+                "steamButton"
+            );
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+        const audio =
+            document.getElementById(
+                "bgMusic"
+            );
+
+        const musicToggle =
+            document.getElementById(
+                "musicToggle"
+            );
+
 
         let toastTimeout = null;
-        let isMusicStarted = false;
 
-        // Запуск музыки
-        function startMusic() {
-            if (isMusicStarted) {
-                return;
-            }
 
-            audio.play()
-                .then(() => {
-                    isMusicStarted = true;
-                    musicToggle.classList.add("playing");
-                })
-                .catch(() => {
-                    console.log(
-                        "Автовоспроизведение заблокировано браузером."
-                    );
-                });
-        }
+        /* =========================
+           МУЗЫКА
+        ========================= */
 
-        // Кнопка музыки
-        musicToggle.addEventListener("click", async () => {
-            if (audio.paused) {
-                try {
-                    await audio.play();
-
-                    isMusicStarted = true;
-                    musicToggle.classList.add("playing");
-                } catch (error) {
-                    console.log("Не удалось запустить музыку:", error);
-                }
-            } else {
-                audio.pause();
-                musicToggle.classList.remove("playing");
-                isMusicStarted = false;
-            }
-        });
-
-        // Показ уведомления
-        function showToast() {
-            if (toastTimeout) {
-                clearTimeout(toastTimeout);
-            }
-
-            toast.classList.add("show");
-
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove("show");
-                toastTimeout = null;
-            }, 4500);
-        }
-
-        // Кнопка Discord
-        button.addEventListener("click", async () => {
-            startMusic();
+        async function startMusic() {
 
             try {
-                if (
-                    navigator.clipboard &&
-                    navigator.clipboard.writeText
-                ) {
+
+                await audio.play();
+
+                musicToggle.classList.add(
+                    "playing"
+                );
+
+            } catch (error) {
+
+                console.log(
+                    "Браузер заблокировал автозапуск музыки."
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           КНОПКА МУЗЫКИ
+        ========================= */
+
+        musicToggle.addEventListener(
+            "click",
+            async () => {
+
+                if (audio.paused) {
+
+                    try {
+
+                        await audio.play();
+
+                        musicToggle.classList.add(
+                            "playing"
+                        );
+
+                    } catch (error) {
+
+                        console.log(
+                            "Не удалось запустить музыку:",
+                            error
+                        );
+
+                    }
+
+                } else {
+
+                    audio.pause();
+
+                    musicToggle.classList.remove(
+                        "playing"
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           УВЕДОМЛЕНИЕ
+        ========================= */
+
+        function showToast() {
+
+            if (toastTimeout) {
+
+                clearTimeout(
+                    toastTimeout
+                );
+
+            }
+
+            toast.classList.add(
+                "show"
+            );
+
+
+            toastTimeout =
+                setTimeout(
+                    () => {
+
+                        toast.classList.remove(
+                            "show"
+                        );
+
+                        toastTimeout = null;
+
+                    },
+                    4500
+                );
+
+        }
+
+
+        /* =========================
+           DISCORD
+        ========================= */
+
+        discordButton.addEventListener(
+            "click",
+            async () => {
+
+                try {
+
                     await navigator.clipboard.writeText(
                         discordUsername
                     );
-                } else {
-                    throw new Error("Clipboard API недоступен");
-                }
 
-                showToast();
-            } catch (error) {
-                // Запасной способ копирования
-                const textarea = document.createElement("textarea");
+                    showToast();
 
-                textarea.value = discordUsername;
-                textarea.style.position = "fixed";
-                textarea.style.opacity = "0";
-                textarea.style.pointerEvents = "none";
+                } catch (error) {
 
-                document.body.appendChild(textarea);
+                    /* Старый способ копирования */
 
-                textarea.select();
-                textarea.setSelectionRange(0, textarea.value.length);
+                    const textarea =
+                        document.createElement(
+                            "textarea"
+                        );
 
-                try {
-                    document.execCommand("copy");
-                } catch (copyError) {
-                    console.log(
-                        "Не удалось скопировать текст:",
-                        copyError
+                    textarea.value =
+                        discordUsername;
+
+                    textarea.style.position =
+                        "fixed";
+
+                    textarea.style.opacity =
+                        "0";
+
+                    document.body.appendChild(
+                        textarea
                     );
+
+                    textarea.select();
+
+                    try {
+
+                        document.execCommand(
+                            "copy"
+                        );
+
+                    } catch (copyError) {
+
+                        console.log(
+                            "Не удалось скопировать:",
+                            copyError
+                        );
+
+                    }
+
+                    textarea.remove();
+
+                    showToast();
+
                 }
 
-                textarea.remove();
-
-                showToast();
             }
-        });
+        );
 
-        // Клик по Steam
-        steamButton.addEventListener("click", () => {
-            startMusic();
-        });
 
-        // Попытка запустить музыку при первом взаимодействии
-        document.addEventListener(
+        /* =========================
+           STEAM
+        ========================= */
+
+        steamButton.addEventListener(
             "click",
             () => {
-                startMusic();
-            },
-            { once: true }
+
+                /*
+                 * Музыка может продолжать играть,
+                 * пока пользователь переходит в Steam.
+                 */
+
+            }
         );
+
     </script>
 
 </body>
 </html>
-```
